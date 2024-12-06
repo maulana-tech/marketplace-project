@@ -8,6 +8,19 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden p-10 shadow-sm sm:rounded-lg flex flex-col gap-y-5">
+
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="py-5 bg-red-500 text-white font-bold">
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <a href="{{ route('admin.products.create') }}" class="w-fit rounded-full font-bold py-3 px-5 bg-indigo-900 text-white">
                     Add Product
                 </a>
@@ -15,19 +28,25 @@
                     <div class="item-product flex flex flex-row justify-between items-center">
                     <img src="{{ Storage::url($product->cover) }}" class="h-[80px] w-auto " alt="">
                     <div>
-                            <h3>Nama Product</h3>
-                            <p>Categori Product</p>
+                        <h3>{{ $product->name }}</h3>
+                        <p>{{ $product->category->name }}</p>
+                        <p>{{ $product->creator->name }}</p>
                         </div>
                         <div>
-                            <p>Rp 11000000</p>
+                            <p>Rp {{ $product->price }}</p>
                         </div>
                         <div class="flex flex-row gap-x-3">
-                            <a href="#" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
+                            <a href="{{ route('admin.products.edit', $product)}}" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
                                 Edit
                             </a>
-                            <a href="#" class="rounded-full font-bold py-3 px-5 bg-red-500 text-white">
+
+                            <form action="{{ route('admin.products.destroy', $product)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="rounded-full font-bold py-3 px-5 bg-red-500 text-white">
                                 Delete
-                            </a>
+                            </button>
+                            </form>
                         </div>
                     </div>
                 @empty
