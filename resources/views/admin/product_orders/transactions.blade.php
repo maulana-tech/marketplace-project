@@ -20,29 +20,38 @@
                         </ul>
                     </div>
                 @endif
+                <div class="flex flex-row justify-between items-center mb-5">
+                    <h3 class="text-indigo-950 font-bold text-2xl">My Transactions</h3>
+                </div>
+
                  @forelse ($my_transactions as $transaction)
                     <div class="item-product flex flex flex-row justify-between items-center">
-                    <img src="{{ Storage::url($transaction->product->cover) }}" class="h-[80px] w-auto " alt="">
-                    <div>
-                        <h3>{{ $transaction->product->name }}</h3>
-                        <p>{{ $transaction->product->category->name }}</p>
-                        </div>
+                    <div class="flex flex-row items-center gap-x-5">
+                        <img src="{{ Storage::url($transaction->product->cover) }}" class="rounded-2xl h-[100px] w-auto " alt="">
                         <div>
-                            <p class="mb-2">Rp {{ $transaction->total_price }}</p>
+                            <h3 class="text-indigo-950 font-bold text-xl">{{ $transaction->product->name }}</h3>
+                            <p class="text-slate-600 text-sm">{{ $transaction->product->category->name }}</p>
+                            </div>
+                    </div>
+                    <div>
+                        <p class="text-slate-600 text-sm">Total Price:</p>
+                        <p class="text-indigo-950 font-bold text-xl">Rp {{ $transaction->total_price }}</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-600 text-sm">Status:</p>
                             @if($transaction->is_paid)
-                                <span class="py-2 px-5 rounded-full bg-green-500 text-white font-bold text-sm">
-                                    PAID
-                                </span>
+                            <span class="py-1 px-3 rounded-full bg-green-500 text-white font-bold text-sm">
+                                SUCCESS
+                            </span>
                             @else
-                                <span class="py-2 px-5 rounded-full bg-yellow-500 text-white font-bold text-sm">
-                                    PENDING
-                                </span>
-
+                            <span class="py-1 px-3 rounded-full bg-yellow-500 text-white font-bold text-sm">
+                                PENDING
+                            </span>
                             @endif
-                        </div>
+                    </div>
                         <div class="flex flex-row gap-x-3">
                             <a href="{{ route('admin.product_orders.transactions.details', $transaction)}}" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
-                                Details
+                               View Details
                             </a>
                         </div>
                     </div>

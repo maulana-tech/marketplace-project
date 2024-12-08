@@ -21,19 +21,24 @@
                     </div>
                 @endif
 
-                <a href="{{ route('admin.products.create') }}" class="w-fit rounded-full font-bold py-3 px-5 bg-indigo-900 text-white">
-                    Add Product
-                </a>
+                <div class="flex flex-row justify-between items-center mb-5">
+                    <h3 class="text-indigo-950 font-bold text-xl">My Products</h3>
+                    <a href="{{ route('admin.products.create') }}" class="w-fit rounded-full font-bold py-3 px-5 bg-indigo-900 text-white">
+                        Add Product
+                    </a>
+                </div>
+
                  @forelse ($products as $product)
                     <div class="item-product flex flex flex-row justify-between items-center">
-                    <img src="{{ Storage::url($product->cover) }}" class="h-[80px] w-auto " alt="">
-                    <div>
-                        <h3>{{ $product->name }}</h3>
-                        <p>{{ $product->category->name }}</p>
-                        <p>{{ $product->creator->name }}</p>
-                        </div>
+                    <div class="flex flex-row items-center gap-x-5">
+                        <img src="{{ Storage::url($product->cover) }}" class="rounded-2xl h-[100px] w-auto " alt="">
                         <div>
-                            <p>Rp {{ $product->price }}</p>
+                            <h3 class="text-indigo-950 font-bold text-xl">{{ $product->name }}</h3>
+                            <p class="text-slate-600 text-sm">{{ $product->category->name }}</p>
+                        </div>
+                    </div>
+                        <div>
+                            <p class="text-indigo-950 font-bold text-xl">Rp {{ $product->price }}</p>
                         </div>
                         <div class="flex flex-row gap-x-3">
                             <a href="{{ route('admin.products.edit', $product)}}" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">

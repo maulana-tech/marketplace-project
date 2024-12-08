@@ -41,9 +41,11 @@
                         </div>
                         <img src="{{ Storage::url($order->proof) }}" class="h-auto w-[300px] " alt="">
                         <div class="flex flex-row gap-x-3">
-                            <a href="" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
-                                Download Product
-                            </a>
+                            @if($order->is_paid)
+                                <a href="{{route('admin.product_orders.download', $order)}}" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
+                                    Download Product
+                                </a>
+                            @endif
                         </div>
                     </div>
             </div>
