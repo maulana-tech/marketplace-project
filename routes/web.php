@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductOrderController;
 use App\Http\Controllers\ProfileController;
@@ -16,13 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/download/file/{productOrder}', [ProductOrderController::class, 'download_file'])
         ->name('product_orders.download')->middleware('throttle:1,1');
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     });
 });
 
