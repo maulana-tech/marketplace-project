@@ -28,6 +28,12 @@
                         {{ __('My Orders') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.product_orders.transactions')" :active="request()->routeIs('admin.product_orders.transactions')">
+                        {{ __('My Transactions') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

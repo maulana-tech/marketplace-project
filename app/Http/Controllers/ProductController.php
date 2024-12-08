@@ -129,8 +129,6 @@ class ProductController extends Controller
              $validated['slug'] = Str::slug($request->name);
              $validated['creator_id'] = Auth::id();
 
-             $newProduct = Product::create($validated);
-
              $product->update($validated);
              
              DB::commit();

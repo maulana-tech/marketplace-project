@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden p-10 shadow-sm sm:rounded-lg flex flex-col gap-y-5">
 
             @if ($errors->any())
@@ -20,37 +20,32 @@
                         </ul>
                     </div>
                 @endif
-                 @forelse ($my_orders as $order)
-                    <div class="item-product flex flex flex-row justify-between items-center">
-                    <img src="{{ Storage::url($order->product->cover) }}" class="h-[80px] w-auto " alt="">
+                <div class="item-product flex flex flex-col gap-y-10 ">
+                    <img src="{{ Storage::url($order->product->cover) }}" class="h-auto w-[300px] " alt="">
                     <div>
                         <h3>{{ $order->product->name }}</h3>
                         <p>{{ $order->product->category->name }}</p>
                         </div>
-                        <div>
+                        <div class="flex flex-row gap-x-5 items-center">
                             <p class="mb-2">Rp {{ $order->total_price }}</p>
-                            
                             @if($order->is_paid)
-                            <span class="py-2 px-5 rounded-full bg-green-500 text-white font-bold text-sm">
-                                PAID
-                            </span>
+                                <span class="py-2 px-5 rounded-full bg-green-500 text-white font-bold text-sm">
+                                    PAID
+                                </span>
                             @else
-                            <span class="py-2 px-5 rounded-full bg-yellow-500 text-white font-bold text-sm">
-                                PENDING
-                            </span>
-
+                                <span class="py-2 px-5 rounded-full bg-yellow-500 text-white font-bold text-sm">
+                                    PENDING
+                                </span>
                             @endif
-                        </div>
 
+                        </div>
+                        <img src="{{ Storage::url($order->proof) }}" class="h-auto w-[300px] " alt="">
                         <div class="flex flex-row gap-x-3">
-                            <a href="{{ route('admin.product_orders.show', $order)}}" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
-                                Details
+                            <a href="" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
+                                Download Product
                             </a>
                         </div>
                     </div>
-                @empty
-                    <p>Belum ada pembelian product tersedia</p>
-                @endforelse
             </div>
         </div>
     </div>

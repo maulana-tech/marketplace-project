@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Orders') }}
+            {{ __('Transactions') }}
         </h2>
     </x-slot>
 
@@ -20,36 +20,34 @@
                         </ul>
                     </div>
                 @endif
-                 @forelse ($my_orders as $order)
+                 @forelse ($my_transactions as $transaction)
                     <div class="item-product flex flex flex-row justify-between items-center">
-                    <img src="{{ Storage::url($order->product->cover) }}" class="h-[80px] w-auto " alt="">
+                    <img src="{{ Storage::url($transaction->product->cover) }}" class="h-[80px] w-auto " alt="">
                     <div>
-                        <h3>{{ $order->product->name }}</h3>
-                        <p>{{ $order->product->category->name }}</p>
+                        <h3>{{ $transaction->product->name }}</h3>
+                        <p>{{ $transaction->product->category->name }}</p>
                         </div>
                         <div>
-                            <p class="mb-2">Rp {{ $order->total_price }}</p>
-                            
-                            @if($order->is_paid)
-                            <span class="py-2 px-5 rounded-full bg-green-500 text-white font-bold text-sm">
-                                PAID
-                            </span>
+                            <p class="mb-2">Rp {{ $transaction->total_price }}</p>
+                            @if($transaction->is_paid)
+                                <span class="py-2 px-5 rounded-full bg-green-500 text-white font-bold text-sm">
+                                    PAID
+                                </span>
                             @else
-                            <span class="py-2 px-5 rounded-full bg-yellow-500 text-white font-bold text-sm">
-                                PENDING
-                            </span>
+                                <span class="py-2 px-5 rounded-full bg-yellow-500 text-white font-bold text-sm">
+                                    PENDING
+                                </span>
 
                             @endif
                         </div>
-
                         <div class="flex flex-row gap-x-3">
-                            <a href="{{ route('admin.product_orders.show', $order)}}" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
+                            <a href="{{ route('admin.product_orders.transactions.details', $transaction)}}" class="rounded-full font-bold py-3 px-5 bg-indigo-500 text-white">
                                 Details
                             </a>
                         </div>
                     </div>
                 @empty
-                    <p>Belum ada pembelian product tersedia</p>
+                    <p>Belum ada Transaksi anda tersedia</p>
                 @endforelse
             </div>
         </div>

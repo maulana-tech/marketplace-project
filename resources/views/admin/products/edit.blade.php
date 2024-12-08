@@ -26,9 +26,9 @@
                     <h1 class="text-indigo-950 text-3xl font-bold">Edit Product</h1>
                     <!-- Name -->
                     <div class="mt-4">
-                        <x-input-label for="cover" :value="__('existing cover')" />
-                        <img src="{{ Storage::url($product->cover) }}" class="h-[80px] w-auto " alt="">
-                        <x-text-input id="cover" class="block mt-1 w-full" type="file" name="cover"  />
+                        <x-input-label for="cover" :value="__('cover')" />
+                        <img src="{{ Storage::url($product->cover) }}" class="h-[80px] w-auto" alt="">
+                        <x-text-input id="cover" class="block mt-1 w-full" type="file" name="cover" />
                         <x-input-error :messages="$errors->get('cover')" class="mt-2" />
                     </div>
 
@@ -37,7 +37,7 @@
                         <p>
                         {{ Storage::url($product->path_file) }}
                         </p>
-                        <x-text-input id="path_file" class="block mt-1 w-full" type="file" name="path_file"  />
+                        <x-text-input id="path_file" class="block mt-1 w-full" type="file" name="path_file" />
                         <x-input-error :messages="$errors->get('path_file')" class="mt-2" />
                     </div>
 
