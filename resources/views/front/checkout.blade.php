@@ -188,7 +188,7 @@
                                 <div class="flex flex-col w-full">
                                     <label for="name" class="text-xs text-belibang-grey pl-1">Account Name</label>
                                     <div class="flex mt-1 items-center max-w-[149px]">
-                                        <input disabled type="text" name="name" value="{{$product->creator->bank_account}}" id="name"
+                                        <input disabled type="text" name="name" value="{{$product->creator->bank_account_name}}" id="name"
                                             class="font-semibold bg-transparent appearance-none autofull-no-bg outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
                                             placeholder="Type here" required></input>
                                     </div>
