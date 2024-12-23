@@ -20,6 +20,7 @@
                         </ul>
                     </div>
                 @endif
+                
                 <div class="flex flex-row justify-between items-center mb-5">
                     <h3 class="text-indigo-950 font-bold text-2xl">My Transactions</h3>
                 </div>

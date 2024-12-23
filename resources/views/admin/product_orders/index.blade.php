@@ -36,7 +36,7 @@
                     </div>
                     <div>
                         <p class="text-slate-600 text-sm">Total Price:</p>
-                        <p class="text-indigo-950 font-bold text-xl">Rp {{ $order->total_price }}</p>
+                        <p class="text-indigo-950 font-bold text-xl">Rp {{ number_format($order->total_price) }}</p>
                     </div>
                     <div>
                         <p class="text-slate-600 text-sm">Status:</p>

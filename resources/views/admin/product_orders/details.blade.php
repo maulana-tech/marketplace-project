@@ -26,6 +26,9 @@
                         <h3>{{ $order->product->name }}</h3>
                         <p>{{ $order->product->category->name }}</p>
                         </div>
+                        <hr>
+                        <p class="text-sm text-slate-500 font-bold">{{ $order->buyer->name }}</p>
+                        <hr>
                         <div class="flex flex-row gap-x-5 items-center">
                             <p class="mb-2">Rp {{ $order->total_price }}</p>
                             @if($order->is_paid)
