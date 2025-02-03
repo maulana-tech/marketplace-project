@@ -66,6 +66,6 @@
                     </div>
                 </div>
             </div>
-            <p class="text-[10px] text-[#595959]">© 2024, Belibang LLC.</p>
+            <p class="text-[10px] text-[#595959]">© 2025, marketbang LLC.</p>
         </div>
     </footer>
