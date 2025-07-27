@@ -15,6 +15,17 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Role Selection -->
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('Daftar Sebagai')" />
+            <select id="role" name="role" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" required>
+                <option value="">Pilih Role</option>
+                <option value="penjual" {{ old('role') == 'penjual' ? 'selected' : '' }}>Penjual (Seller)</option>
+                <option value="pembeli" {{ old('role') == 'pembeli' ? 'selected' : '' }}>Pembeli (Buyer)</option>
+            </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
