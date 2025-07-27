@@ -164,6 +164,94 @@
                 @csrf
 
 
+                <!-- Buyer Information -->
+                <div class="w-full flex flex-col gap-4">
+                    <p class="font-semibold text-xl">Buyer Information:</p>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-1 p-[12px_20px] pl-4 justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                            <div class="flex flex-col w-full">
+                                <label for="buyer_name" class="text-xs text-belibang-grey pl-1">Full Name</label>
+                                <input type="text" name="buyer_name" id="buyer_name" 
+                                    class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
+                                    placeholder="Enter your full name" value="{{ auth()->user()->name }}" required>
+                            </div>
+                            <div class="w-6 h-6 flex shrink-0">
+                                <img src="{{asset('images/icons/user-square.svg')}}" alt="icon">
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-1 p-[12px_20px] pl-4 justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                            <div class="flex flex-col w-full">
+                                <label for="phone" class="text-xs text-belibang-grey pl-1">Phone Number</label>
+                                <input type="tel" name="phone" id="phone" 
+                                    class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
+                                    placeholder="Enter your phone number" required>
+                            </div>
+                            <div class="w-6 h-6 flex shrink-0">
+                                <img src="{{asset('images/icons/card.svg')}}" alt="icon">
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-1 p-[12px_20px] pl-4 justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                            <div class="flex flex-col w-full">
+                                <label for="address" class="text-xs text-belibang-grey pl-1">Shipping Address</label>
+                                <textarea name="address" id="address" rows="3"
+                                    class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full resize-none"
+                                    placeholder="Enter your complete shipping address" required></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Options -->
+                        <div class="flex gap-3">
+                            <div class="flex items-center gap-1 p-[12px_20px] pl-4 w-[120px] justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                <div class="flex flex-col">
+                                    <label for="quantity" class="text-xs text-belibang-grey pl-1">Quantity</label>
+                                    <input type="number" name="quantity" id="quantity" min="1" max="{{ $product->quantity }}"
+                                        class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg outline-none px-1 w-full"
+                                        value="1" required>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-1 p-[12px_20px] pl-4 w-[100px] justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                <div class="flex flex-col">
+                                    <label for="size" class="text-xs text-belibang-grey pl-1">Size</label>
+                                    <input type="text" name="size" id="size" 
+                                        class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg outline-none px-1 w-full"
+                                        value="{{ $product->size }}" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-1 p-[12px_20px] pl-4 w-[100px] justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                <div class="flex flex-col">
+                                    <label for="color" class="text-xs text-belibang-grey pl-1">Color</label>
+                                    <input type="text" name="color" id="color" 
+                                        class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg outline-none px-1 w-full"
+                                        value="{{ $product->color }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Total Price Display -->
+                        <div class="bg-[#2A2A2A] rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-belibang-grey">Unit Price:</span>
+                                <span class="font-semibold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                            </div>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-belibang-grey">Quantity:</span>
+                                <span class="font-semibold" id="display-quantity">1</span>
+                            </div>
+                            <hr class="border-[#414141] my-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold">Total Amount:</span>
+                                <span class="font-semibold text-lg bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B]" id="total-amount">
+                                    Rp {{ number_format($product->price, 0, ',', '.') }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="w-full flex flex-col gap-4">
                     <p class="font-semibold text-xl">Transfer to:</p>
                     <div class="flex flex-col gap-3">
@@ -290,6 +378,19 @@
     document.addEventListener('DOMContentLoaded', function () {
         const menuButton = document.getElementById('menu-button');
         const dropdownMenu = document.querySelector('.dropdown-menu');
+        const quantityInput = document.getElementById('quantity');
+        const displayQuantity = document.getElementById('display-quantity');
+        const totalAmount = document.getElementById('total-amount');
+        const unitPrice = {{ $product->price }};
+
+        // Update total price when quantity changes
+        quantityInput.addEventListener('input', function() {
+            const quantity = parseInt(this.value) || 1;
+            const total = unitPrice * quantity;
+            
+            displayQuantity.textContent = quantity;
+            totalAmount.textContent = 'Rp ' + total.toLocaleString('id-ID');
+        });
 
         menuButton.addEventListener('click', function () {
             dropdownMenu.classList.toggle('hidden');
