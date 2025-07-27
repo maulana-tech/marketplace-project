@@ -20,6 +20,20 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/admin/dashboard';
 
     /**
+     * Get the home route based on user role
+     */
+    public static function getHomeRoute()
+    {
+        $user = auth()->user();
+        
+        if (!$user) {
+            return '/';
+        }
+        
+        return $user->isPembeli() ? '/' : '/admin/dashboard';
+    }
+
+    /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
     public function boot(): void
