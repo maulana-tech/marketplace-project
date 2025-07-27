@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'avatar',
         'password',
         'occupation',
@@ -46,4 +47,41 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Relationships
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'creator_id');
+    }
+
+    public function productOrders()
+    {
+        return $this->hasMany(ProductOrder::class, 'buyer_id');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(ProductOrder::class, 'creator_id');
+    }
+
+    public function testimonials()
+    {
+        return $this->hasMany(Testimonial::class, 'seller_id');
+    }
+
+    public function givenTestimonials()
+    {
+        return $this->hasMany(Testimonial::class, 'buyer_id');
+    }
+
+    // Helper methods
+    public function isPenjual()
+    {
+        return $this->role === 'penjual';
+    }
+
+    public function isPembeli()
+    {
+        return $this->role === 'pembeli';
+    }
 }
