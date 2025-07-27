@@ -33,9 +33,21 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="path_file" :value="__('path_file')" />
-                        <x-text-input id="path_file" class="block mt-1 w-full" type="file" name="path_file"  required />
-                        <x-input-error :messages="$errors->get('path_file')" class="mt-2" />
+                        <x-input-label for="quantity" :value="__('Quantity')" />
+                        <x-text-input id="quantity" class="block mt-1 w-full" type="number" name="quantity" :value="old('quantity')" required autofocus autocomplete="quantity" />
+                        <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-input-label for="size" :value="__('Size')" />
+                        <x-text-input id="size" class="block mt-1 w-full" type="text" name="size" :value="old('size')" required autofocus autocomplete="size" />
+                        <x-input-error :messages="$errors->get('size')" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-input-label for="color" :value="__('Color')" />
+                        <x-text-input id="color" class="block mt-1 w-full" type="text" name="color" :value="old('color')" required autofocus autocomplete="color" />
+                        <x-input-error :messages="$errors->get('color')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
