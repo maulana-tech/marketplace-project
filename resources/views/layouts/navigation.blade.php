@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('admin.dashboard') }}">
+                    <a href="@if(auth()->user()->role === 'penjual'){{ route('admin.dashboard') }}@else{{ route('front.index') }}@endif">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -17,29 +17,51 @@
                     </x-nav-link>
                 </div>
                 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
+                @if(auth()->user()->role === 'penjual')
+                    <!-- Seller Navigation -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                        {{ __('My Products') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
+                            {{ __('My Products') }}
+                        </x-nav-link>
+                    </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.product_orders.index')" :active="request()->routeIs('admin.product_orders.index')">
-                        {{ __('My Orders') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.product_orders.index')" :active="request()->routeIs('admin.product_orders.*')">
+                            {{ __('Order History') }}
+                        </x-nav-link>
+                    </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.product_orders.transactions')" :active="request()->routeIs('admin.product_orders.transactions')">
-                        {{ __('My Transactions') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.testimonials.index')" :active="request()->routeIs('admin.testimonials.*')">
+                            {{ __('Customer Reviews') }}
+                        </x-nav-link>
+                    </div>
+                @else
+                    <!-- Buyer Navigation -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('buyer.orders.index')" :active="request()->routeIs('buyer.orders.*')">
+                            {{ __('My Orders') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('buyer.orders.stories')" :active="request()->routeIs('buyer.orders.stories')">
+                            {{ __('Stories') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('buyer.testimonials.index')" :active="request()->routeIs('buyer.testimonials.*')">
+                            {{ __('My Reviews') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -94,9 +116,34 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('front.index')" :active="request()->routeIs('home')">
+                {{ __('Home') }}
             </x-responsive-nav-link>
+            
+            @if(auth()->user()->role === 'penjual')
+                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
+                    {{ __('My Products') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.product_orders.index')" :active="request()->routeIs('admin.product_orders.*')">
+                    {{ __('Order History') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.testimonials.index')" :active="request()->routeIs('admin.testimonials.*')">
+                    {{ __('Customer Reviews') }}
+                </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link :href="route('buyer.orders.index')" :active="request()->routeIs('buyer.orders.*')">
+                    {{ __('My Orders') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('buyer.orders.stories')" :active="request()->routeIs('buyer.orders.stories')">
+                    {{ __('Stories') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('buyer.testimonials.index')" :active="request()->routeIs('buyer.testimonials.*')">
+                    {{ __('My Reviews') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
