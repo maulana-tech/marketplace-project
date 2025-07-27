@@ -19,4 +19,61 @@ class ProductOrder extends Model
     public function buyer(){
         return $this->belongsTo(User::class, 'buyer_id');
     }
+
+    public function seller(){
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function testimonial()
+    {
+        return $this->hasOne(Testimonial::class, 'product_order_id');
+    }
+
+    public function testimonials()
+    {
+        return $this->hasMany(Testimonial::class, 'product_order_id');
+    }
+
+    // Scope untuk status
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
+    }
+
+    public function scopeSuccess($query)
+    {
+        return $query->where('status', 'success');
+    }
+
+    public function scopeCancelled($query)
+    {
+        return $query->where('status', 'cancelled');
+    }
+
+    // Helper methods untuk status
+    public function isPending()
+    {
+        return $this->status === 'pending';
+    }
+
+    public function isSuccess()
+    {
+        return $this->status === 'success';
+    }
+
+    public function isCancelled()
+    {
+        return $this->status === 'cancelled';
+    }
+
+    // Method untuk update status
+    public function markAsSuccess()
+    {
+        $this->update(['status' => 'success']);
+    }
+
+    public function markAsCancelled()
+    {
+        $this->update(['status' => 'cancelled']);
+    }
 }

@@ -19,6 +19,33 @@ class Product extends Model
 
     public function creator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    // Alias for backward compatibility
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function productOrders()
+    {
+        return $this->hasMany(ProductOrder::class);
+    }
+
+    // Scope untuk produk yang masih ada stok
+    public function scopeInStock($query)
+    {
+        return $query->where('quantity', '>', 0);
+    }
+
+    // Helper method untuk mengurangi stok
+    public function decreaseStock($quantity)
+    {
+        if ($this->quantity >= $quantity) {
+            $this->decrement('quantity', $quantity);
+            return true;
+        }
+        return false;
     }
 }
