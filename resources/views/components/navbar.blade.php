@@ -8,86 +8,35 @@
                     <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
                         <a href="{{route('front.index')}}">Home</a>
                     </li>
-                    <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300 relative">
-                        <button id="menu-button" class="flex items-center gap-1 focus:text-belibang-light-grey">
-                            <span>Categories</span>
-                            <img src="{{asset('images/icons/arrow-down.svg')}}" alt="icon">
-                        </button>
-                        <div
-                            class="dropdown-menu hidden absolute top-[52px] grid grid-cols-2 p-4 gap-[10px] w-[526px] rounded-[20px] bg-[#1E1E1E] border border-[#414141] z-10">
-                            <div
-                                class="col-span-2 flex justify-between items-center rounded-2xl p-[12px_16px] border border-[#414141] hover:bg-[#2A2A2A] transition-all duration-300">
-                                <div class="flex items-center">
-                                    <a href="{{route('front.index')}}" class="w-[58px] h-[58px] flex shrink-0 flex items-center">
-                                        <img src="{{asset('images/icons/cart.svg')}}" alt="icon">
-                                    </a>
-                                    <a href="" class="flex flex-col">
-                                        <p class="font-bold text-sm text-white">All Products</p>
-                                        <p class="text-xs text-belibang-grey">Everything in One Place</p>
-                                    </a>
-                                </div>
-                                <div class="w-6 h-6 flex shrink-0">
-                                    <img src="{{asset('images/icons/crown.svg')}}" alt="icon">
-                                </div>
-                            </div>
-                            <div
-                                class="flex justify-between items-center rounded-2xl p-[12px_16px] border border-[#414141] hover:bg-[#2A2A2A] transition-all duration-300">
-                                <div class="flex items-center">
-                                    <a href="{{route('front.category', 3)}}" class="w-[58px] h-[58px] flex shrink-0 flex items-center">
-                                        <img src="{{asset('images/ic_template.svg')}}" alt="icon">
-                                    </a>
-                                    <a href="{{route('front.category', 3)}}" class="flex flex-col">
-                                        <p class="font-bold text-sm text-white">Templates</p>
-                                        <p class="text-xs text-belibang-grey">Designs Made Easy</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div
-                                class="flex justify-between items-center rounded-2xl p-[12px_16px] border border-[#414141] hover:bg-[#2A2A2A] transition-all duration-300">
-                                <div class="flex items-center">
-                                    <a href="{{route('front.category', 2)}}" class="w-[58px] h-[58px] flex shrink-0 flex items-center">
-                                        <img src="{{asset('images/ic_course.svg')}}" alt="icon">
-                                    </a>
-                                    <a href="{{route('front.category', 2)}}" class="flex flex-col">
-                                        <p class="font-bold text-sm text-white">Courses</p>
-                                        <p class="text-xs text-belibang-grey">Expand Your Skills</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div
-                                class="flex justify-between items-center rounded-2xl p-[12px_16px] border border-[#414141] hover:bg-[#2A2A2A] transition-all duration-300">
-                                <div class="flex items-center">
-                                    <a href="{{route('front.category', 1)}}" class="w-[58px] h-[58px] flex shrink-0 flex items-center">
-                                        <img src="{{asset('images/ic_ebook.svg')}}" alt="icon">
-                                    </a>
-                                    <a href="{{route('front.category', 1)}}" class="flex flex-col">
-                                        <p class="font-bold text-sm text-white">Ebooks</p>
-                                        <p class="text-xs text-belibang-grey">Read and Learn</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div
-                                class="flex justify-between items-center rounded-2xl p-[12px_16px] border border-[#414141] hover:bg-[#2A2A2A] transition-all duration-300">
-                                <div class="flex items-center">
-                                    <a href="{{route('front.category', 4)}}" class="w-[58px] h-[58px] flex shrink-0 flex items-center">
-                                        <img src="{{asset('images/ic_font.svg')}}" alt="icon">
-                                    </a>
-                                    <a href="{{route('front.category', 4)}}" class="flex flex-col">
-                                        <p class="font-bold text-sm text-white">Fonts</p>
-                                        <p class="text-xs text-belibang-grey">Typography Selection</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
+                        <a href="{{route('front.category', 1)}}">Reebok</a>
                     </li>
                     <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
-                        <a href="">Stories</a>
+                        <a href="{{route('front.category', 2)}}">Nike</a>
                     </li>
                     <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
-                        <a href="">Benefits</a>
+                        <a href="{{route('front.category', 3)}}">Adidas</a>
                     </li>
                     <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
-                        <a href="">About</a>
+                        <a href="{{route('front.category', 4)}}">New Balance</a>
+                    </li>
+                    @auth
+                        @if(auth()->user()->role === 'pembeli')
+                            <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
+                                <a href="{{ route('buyer.orders.stories') }}">Stories</a>
+                            </li>
+                        @else
+                            <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
+                                <a href="{{ route('admin.product_orders.index') }}">Order History</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
+                            <a href="{{ route('login') }}">Stories</a>
+                        </li>
+                    @endauth
+                    <li class="text-belibang-grey hover:text-belibang-light-grey transition-all duration-300">
+                        <a href="{{route('front.about')}}">About</a>
                     </li>
                 </ul>
             </div>
@@ -102,10 +51,42 @@
                 @endguest
 
                 @auth
-
-                <a href="{{route('admin.dashboard')}}"
-                    class="p-[8px_16px] w-fit h-fit rounded-[12px] text-belibang-grey border border-belibang-dark-grey 
-                    hover:bg-[#2A2A2A] hover:text-white transition-all duration-300">My Dashboard</a>
+                <div class="relative">
+                    <button id="user-menu-button" class="flex items-center gap-2 p-[8px_16px] w-fit h-fit rounded-[12px] text-belibang-grey border border-belibang-dark-grey hover:bg-[#2A2A2A] hover:text-white transition-all duration-300">
+                        <span>{{ auth()->user()->name }}</span>
+                        <img src="{{asset('images/icons/arrow-down.svg')}}" alt="icon" class="w-4 h-4">
+                    </button>
+                    <div id="user-dropdown" class="hidden absolute right-0 top-[52px] w-48 rounded-[20px] bg-[#1E1E1E] border border-[#414141] z-10 py-2">
+                        @if(auth()->user()->role === 'pembeli')
+                            <a href="{{ route('buyer.orders.index') }}" class="block px-4 py-2 text-white hover:bg-[#2A2A2A] transition-all duration-300">
+                                My Orders
+                            </a>
+                            <a href="{{ route('buyer.testimonials.index') }}" class="block px-4 py-2 text-white hover:bg-[#2A2A2A] transition-all duration-300">
+                                My Reviews
+                            </a>
+                        @else
+                            <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-white hover:bg-[#2A2A2A] transition-all duration-300">
+                                Dashboard
+                            </a>
+                            <a href="{{ route('admin.products.index') }}" class="block px-4 py-2 text-white hover:bg-[#2A2A2A] transition-all duration-300">
+                                My Products
+                            </a>
+                            <a href="{{ route('admin.product_orders.index') }}" class="block px-4 py-2 text-white hover:bg-[#2A2A2A] transition-all duration-300">
+                                My Transactions
+                            </a>
+                            <a href="{{ route('admin.testimonials.index') }}" class="block px-4 py-2 text-white hover:bg-[#2A2A2A] transition-all duration-300">
+                                Customer Reviews
+                            </a>
+                        @endif
+                        <hr class="border-[#414141] my-2">
+                        <form method="POST" action="{{ route('logout') }}" class="block">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2 text-white hover:bg-[#2A2A2A] transition-all duration-300">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
                 @endauth
             </div>
         </div>
