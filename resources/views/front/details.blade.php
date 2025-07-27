@@ -30,48 +30,8 @@
                 <div class="flex flex-col gap-4">
                     <p class="font-semibold text-xl">Overview</p>
                     <p class="text-belibang-grey leading-[30px]">{{$product->about}}</p>
-                    <div class="flex items-center gap-[10px] mt-1">
-                        <a href=""
-                            class="w-9 h-9 justify-center items-center rounded-full flex shrink-0 overflow-hidden border-[0.69px] border-[#414141]">
-                            <img src="{{asset('/images/logos/Python.svg')}}" class='p-[5px]' alt="logo">
-                        </a>
-                        <a href=""
-                            class="w-9 h-9 justify-center items-center rounded-full flex shrink-0 overflow-hidden border-[0.69px] border-[#414141]">
-                            <img src="{{asset('/images/logos/figma-logo.svg')}}" class='p-[5px]' alt="logo">
-                        </a>
-                        <a href=""
-                            class="w-9 h-9 justify-center items-center rounded-full flex shrink-0 overflow-hidden border-[0.69px] border-[#414141]">
-                            <img src="{{asset('/images/logos/blender.svg')}}" class='p-[5px]' alt="logo">
-                        </a>
-                        <a href=""
-                            class="w-9 h-9 justify-center items-center rounded-full flex shrink-0 overflow-hidden border-[0.69px] border-[#414141]">
-                            <img src="{{asset('/images/logos/Excel.svg')}}" class='p-[5px]' alt="logo">
-                        </a>
-                        <a href=""
-                            class="w-9 h-9 justify-center items-center rounded-full flex shrink-0 overflow-hidden border-[0.69px] border-[#414141]">
-                            <img src="{{asset('/images/logos/Laravel.svg')}}" class='p-[5px]' alt="logo">
-                        </a>
-                        <a href=""
-                            class="w-9 h-9 justify-center items-center rounded-full flex shrink-0 overflow-hidden border-[0.69px] border-[#414141]">
-                            <img src="{{asset('/images/logos/Kotlin.svg')}}" class='p-[5px]' alt="logo">
-                        </a>
-                        <a href=""
-                            class="w-9 h-9 justify-center items-center rounded-full flex shrink-0 overflow-hidden border-[0.69px] border-[#414141]">
-                            <img src="{{asset('/images/logos/flutter.svg')}}" class='p-[5px]' alt="logo">
-                        </a>
-                    </div>
                 </div>
                 <div class="flex flex-row flex-wrap gap-4 items-center">
-                    <a href=""
-                        class="tags p-[4px_8px] border border-[#414141] rounded-[4px] h-fit w-fit text-xs text-belibang-light-grey hover:bg-[#2A2A2A] transition-all duration-300">bank</a>
-                    <a href=""
-                        class="tags p-[4px_8px] border border-[#414141] rounded-[4px] h-fit w-fit text-xs text-belibang-light-grey hover:bg-[#2A2A2A] transition-all duration-300">finance</a>
-                    <a href=""
-                        class="tags p-[4px_8px] border border-[#414141] rounded-[4px] h-fit w-fit text-xs text-belibang-light-grey hover:bg-[#2A2A2A] transition-all duration-300">mobile</a>
-                    <a href=""
-                        class="tags p-[4px_8px] border border-[#414141] rounded-[4px] h-fit w-fit text-xs text-belibang-light-grey hover:bg-[#2A2A2A] transition-all duration-300">money</a>
-                    <a href=""
-                        class="tags p-[4px_8px] border border-[#414141] rounded-[4px] h-fit w-fit text-xs text-belibang-light-grey hover:bg-[#2A2A2A] transition-all duration-300">personal</a>
                 </div>
             </div>
             <div class="flex flex-col w-[366px] gap-[30px] flex-nowrap overflow-y-visible">
@@ -86,37 +46,37 @@
                                     <div class="w-4 h-4 flex shrink-0">
                                         <img src="{{asset('/images/icons/check.svg')}}" alt="icon">
                                     </div>
-                                    <p class="text-belibang-grey">100% Original Content</p>
+                                    <p class="text-belibang-grey">100% Authentic Product</p>
                                 </div>
                                 <div class="flex items-center gap-[10px]">
                                     <div class="w-4 h-4 flex shrink-0">
                                         <img src="{{asset('/images/icons/check.svg')}}" alt="icon">
                                     </div>
-                                    <p class="text-belibang-grey">Lifetime Support</p>
+                                    <p class="text-belibang-grey">Quality Guaranteed</p>
                                 </div>
                                 <div class="flex items-center gap-[10px]">
                                     <div class="w-4 h-4 flex shrink-0">
                                         <img src="{{asset('/images/icons/check.svg')}}" alt="icon">
                                     </div>
-                                    <p class="text-belibang-grey">High-Performance Code</p>
+                                    <p class="text-belibang-grey">Fast & Secure Shipping</p>
                                 </div>
                                 <div class="flex items-center gap-[10px]">
                                     <div class="w-4 h-4 flex shrink-0">
                                         <img src="{{asset('/images/icons/check.svg')}}" alt="icon">
                                     </div>
-                                    <p class="text-belibang-grey">Customizable Themes</p>
+                                    <p class="text-belibang-grey">Easy Return Policy</p>
                                 </div>
                                 <div class="flex items-center gap-[10px]">
                                     <div class="w-4 h-4 flex shrink-0">
                                         <img src="{{asset('/images/icons/check.svg')}}" alt="icon">
                                     </div>
-                                    <p class="text-belibang-grey">Responsive Design</p>
+                                    <p class="text-belibang-grey">Customer Support 24/7</p>
                                 </div>
                                 <div class="flex items-center gap-[10px]">
                                     <div class="w-4 h-4 flex shrink-0">
                                         <img src="{{asset('/images/icons/check.svg')}}" alt="icon">
                                     </div>
-                                    <p class="text-belibang-grey">Comprehensive Documentation</p>
+                                    <p class="text-belibang-grey">Affordable Price</p>
                                 </div>
                             </div>
                         </div>
