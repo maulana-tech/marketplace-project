@@ -31,11 +31,11 @@
                     <div class="flex flex-col gap-8">
                         <p class="font-semibold text-sm">Browse</p>
                         <div class="flex flex-col gap-[18px]">
-                            <a href="" class="text-belibang-grey font-semibold text-xs">All Products</a>
-                            <a href="" class="text-belibang-grey font-semibold text-xs">Templates</a>
-                            <a href="" class="text-belibang-grey font-semibold text-xs">Ebooks</a>
-                            <a href="" class="text-belibang-grey font-semibold text-xs">Courses</a>
-                            <a href="" class="text-belibang-grey font-semibold text-xs">Fonts</a>
+                            <a href="{{route('front.index')}}" class="text-belibang-grey font-semibold text-xs">All Products</a>
+                            <a href="{{route('front.category', 1)}}" class="text-belibang-grey font-semibold text-xs">Reebok</a>
+                            <a href="{{route('front.category', 2)}}" class="text-belibang-grey font-semibold text-xs">Nike</a>
+                            <a href="{{route('front.category', 3)}}" class="text-belibang-grey font-semibold text-xs">Adidas</a>
+                            <a href="{{route('front.category', 4)}}" class="text-belibang-grey font-semibold text-xs">New Balance</a>
                         </div>
                     </div>
                     <div class="flex flex-col gap-8">
