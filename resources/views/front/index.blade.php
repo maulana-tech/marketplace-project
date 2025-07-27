@@ -8,8 +8,8 @@
     class="w-full pt-[74px] pb-[34px] bg-[url('{{asset('images/backgrounds/hero-image.png')}}')] bg-cover bg-no-repeat bg-center relative z-0">
     <div class="container max-w-[1130px] mx-auto flex flex-col items-center justify-center gap-[34px] z-10">
         <div class="flex flex-col gap-2 text-center w-fit mt-20 z-10">
-            <h1 class="font-semibold text-[60px] leading-[130%]">Explore High Quality<br>Digital Products</h1>
-            <p class="text-lg text-belibang-grey">Change the way you work to achieve better results.</p>
+            <h1 class="font-semibold text-[60px] leading-[130%]">Discover Premium<br>Footwear Collection</h1>
+            <p class="text-lg text-belibang-grey">Step up your style with authentic branded shoes.</p>
         </div>
         <div class="flex w-full justify-center mb-[34px] z-10">
             <form action="{{route('front.search')}}" method="GET"
@@ -20,7 +20,7 @@
                     </button>
                     <input name="keyword" type="text" id="searchInput"
                         class="bg-belibang-darker-grey w-full pl-[36px] focus:outline-none placeholder:text-[#595959] pr-9"
-                        placeholder="Type anything to search..." />
+                        placeholder="Search for shoes, brands, or styles..." />
                     <input name="keyword" type="reset" id="resetButton"
                         class="close-button hidden w-[38px] h-[38px] flex shrink-0 bg-[url('{{asset('images/icons/close.svg')}}')] hover:bg-[url('{{asset('images/icons/close-white.svg')}}')] transition-all duration-300 appearance-none transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 -right-5"
                         value="">
@@ -43,7 +43,7 @@
                 </div>
                 <div class="px-[6px] flex flex-col text-left">
                     <p class="font-bold text-sm">All Products</p>
-                    <p class="text-xs text-belibang-grey">Everything in One Place</p>
+                    <p class="text-xs text-belibang-grey">All Shoe Brands</p>
                 </div>
             </div>
         </a>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="px-[6px] flex flex-col text-left">
                     <p class="font-bold text-sm">{{$category->name}}</p>
-                    <p class="text-xs text-belibang-grey">Designs Made Easy</p>
+                    <p class="text-xs text-belibang-grey">Quality Footwear</p>
                 </div>
             </div>
         </a>
@@ -102,8 +102,6 @@
 
 <x-testimonials/>
 
-<x-tools/>
-
 <x-footer/>
 
 
@@ -111,22 +109,114 @@
 
 @push('after-script')
 <script>
-    $('.testi-carousel').flickity({
-        // options
-        cellAlign: 'left',
-        contain: true,
-        pageDots: false,
-        prevNextButtons: false,
-    });
-
-    // previous
-    $('.btn-prev').on('click', function () {
-        $('.testi-carousel').flickity('previous', true);
-    });
-
-    // next
-    $('.btn-next').on('click', function () {
-        $('.testi-carousel').flickity('next', true);
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousel = document.querySelector('.testi-carousel');
+        const prevBtn = document.querySelector('.btn-prev');
+        const nextBtn = document.querySelector('.btn-next');
+        const cards = document.querySelectorAll('.testimonial-card');
+        
+        if (!carousel || cards.length === 0) return;
+        
+        const cardWidth = 420 + 20; // card width + margin
+        const totalCards = cards.length;
+        const originalCards = totalCards / 2; // Since we duplicated the cards
+        let currentIndex = 0;
+        let autoPlayInterval;
+        let isTransitioning = false;
+        
+        // Set initial position to show first set
+        carousel.style.transform = `translateX(0px)`;
+        
+        // Update carousel position
+        function updateCarousel(animate = true) {
+            if (isTransitioning && animate) return;
+            
+            const translateX = -(currentIndex * cardWidth);
+            
+            if (animate) {
+                isTransitioning = true;
+                carousel.style.transition = 'transform 0.6s ease-in-out';
+                carousel.style.transform = `translateX(${translateX}px)`;
+                
+                setTimeout(() => {
+                    // Check if we need to reset position for infinite effect
+                    if (currentIndex >= originalCards) {
+                        // Reset to beginning without animation
+                        currentIndex = 0;
+                        carousel.style.transition = 'none';
+                        carousel.style.transform = `translateX(0px)`;
+                    } else if (currentIndex < 0) {
+                        // Reset to end without animation
+                        currentIndex = originalCards - 1;
+                        carousel.style.transition = 'none';
+                        carousel.style.transform = `translateX(${-(currentIndex * cardWidth)}px)`;
+                    }
+                    
+                    setTimeout(() => {
+                        isTransitioning = false;
+                    }, 50);
+                }, 600);
+            } else {
+                carousel.style.transition = 'none';
+                carousel.style.transform = `translateX(${translateX}px)`;
+                isTransitioning = false;
+            }
+        }
+        
+        // Next slide
+        function nextSlide() {
+            currentIndex++;
+            updateCarousel();
+        }
+        
+        // Previous slide
+        function prevSlide() {
+            if (currentIndex === 0) {
+                // Jump to the duplicate set at the end
+                currentIndex = originalCards;
+                updateCarousel(false);
+                setTimeout(() => {
+                    currentIndex = originalCards - 1;
+                    updateCarousel();
+                }, 50);
+            } else {
+                currentIndex--;
+                updateCarousel();
+            }
+        }
+        
+        // Auto play
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 3000);
+        }
+        
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+        
+        // Event listeners
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                stopAutoPlay();
+                nextSlide();
+                setTimeout(startAutoPlay, 5000);
+            });
+        }
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function() {
+                stopAutoPlay();
+                prevSlide();
+                setTimeout(startAutoPlay, 5000);
+            });
+        }
+        
+        // Pause on hover
+        carousel.addEventListener('mouseenter', stopAutoPlay);
+        carousel.addEventListener('mouseleave', startAutoPlay);
+        
+        // Start auto play
+        startAutoPlay();
     });
 </script>
 
