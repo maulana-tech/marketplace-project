@@ -45,7 +45,9 @@ class ProductController extends Controller
         $validated = $request->validate([
            'name' => ['required', 'string', 'max:255'],
             'cover' => ['required', 'image', 'mimes:jpg,jpeg,png'], 
-            'path_file' => ['required', 'file', 'mimes:zip'], 
+            'quantity' => ['required', 'integer', 'min:0'], 
+            'size' => ['nullable', 'string', 'max:255'], 
+            'color' => ['nullable', 'string', 'max:255'], 
             'about' => ['required', 'string', 'max:65535'], 
             'category_id' => ['required', 'integer'], 
             'price' => ['required', 'integer', 'min:0'], 
@@ -56,10 +58,6 @@ class ProductController extends Controller
             if ($request->hasFile('cover')) {
                 $coverPath = $request->file('cover')->store('product_covers', 'public');
                 $validated['cover'] = $coverPath;
-            }
-            if ($request->hasFile('path_file')) {
-                $path_filePath = $request->file('path_file')->store('product_files', 'public');
-                $validated['path_file'] = $path_filePath;
             }
             $validated['slug'] = Str::slug($request->name);
             $validated['creator_id'] = Auth::id();
@@ -110,7 +108,9 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
              'cover' => ['sometimes', 'image', 'mimes:jpg,jpeg,png'], 
-             'path_file' => ['sometimes', 'file', 'mimes:zip'], 
+             'quantity' => ['required', 'integer', 'min:0'], 
+             'size' => ['nullable', 'string', 'max:255'], 
+             'color' => ['nullable', 'string', 'max:255'], 
              'about' => ['required', 'string', 'max:65535'], 
              'category_id' => ['required', 'integer'], 
              'price' => ['required', 'integer', 'min:0'], 
@@ -121,10 +121,6 @@ class ProductController extends Controller
              if ($request->hasFile('cover')) {
                  $coverPath = $request->file('cover')->store('product_covers', 'public');
                  $validated['cover'] = $coverPath;
-             }
-             if ($request->hasFile('path_file')) {
-                 $path_filePath = $request->file('path_file')->store('product_files', 'public');
-                 $validated['path_file'] = $path_filePath;
              }
              $validated['slug'] = Str::slug($request->name);
              $validated['creator_id'] = Auth::id();

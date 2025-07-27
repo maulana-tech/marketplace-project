@@ -28,7 +28,11 @@ class CheckoutController extends Controller
         }
 
         $validated = $request->validate([
-           'proof' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], 
+            'buyer_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:500',
+            'quantity' => 'required|integer|min:1|max:' . $product->quantity,
+            'proof' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], 
         ]);
 
         if ($request->hasFile('proof')) {
@@ -36,28 +40,38 @@ class CheckoutController extends Controller
             $validated['proof'] = $proofPath;
         }
 
+        $totalAmount = $product->price * $validated['quantity'];
+
         $data = [
-            'total_price' => $product->price,
-            'is_paid' => false,
-            'buyer_id' => Auth::id(), 
             'creator_id' => $product->creator_id,
+            'buyer_id' => Auth::id(),
             'product_id' => $product->id,
+            'quantity' => $validated['quantity'],
+            'total_price' => $totalAmount,
+            'buyer_name' => $validated['buyer_name'],
+            'buyer_phone' => $validated['phone'],
+            'buyer_address' => $validated['address'],
+            'status' => 'pending',
+            'is_paid' => false,
             'proof' => $validated['proof'],
         ];
 
         DB::beginTransaction();
         try {
-            $newOrder = ProductOrder::firstOrCreate($data);
+            $newOrder = ProductOrder::create($data);
+            
+            // Update product quantity
+            $product->decrement('quantity', $validated['quantity']);
 
             DB::commit();
 
-            return redirect()->route('admin.product_orders.transactions')->with('success', 'Successfully checkout !');
+            return redirect()->route('buyer.orders.index')->with('success', 'Order placed successfully! Please wait for seller confirmation.');
         }
         catch (\Exception $e) {
             DB::rollBack();
 
             $error = ValidationException::withMessages([
-                'system_error' => ['System error!' . $e->getMessage()],
+                'system_error' => ['System error! ' . $e->getMessage()],
             ]);
             throw $error;
         }

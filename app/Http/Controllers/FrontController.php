@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -12,9 +13,15 @@ class FrontController extends Controller
     public function index(){
         $products = Product::all();
         $categories = Category::all();
+        $testimonials = Testimonial::with(['buyer', 'seller', 'productOrder.product'])
+                                  ->highRating()
+                                  ->latest()
+                                  ->limit(6)
+                                  ->get();
         return view('front.index', [
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'testimonials' => $testimonials
         ]);
     }
 
@@ -50,5 +57,9 @@ class FrontController extends Controller
         return view('front.search', [
             'products' => $products
         ]);
+    }
+
+    public function about(){
+        return view('front.about');
     }
 }

@@ -32,6 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'in:penjual,pembeli'],
             'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png'],
             'occupation' => ['required', 'string', 'max:255'],
             'bank_account_name' => ['required', 'string', 'max:255'],
@@ -51,6 +52,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
             'avatar' => $avatarPath,
             'occupation' => $request->occupation,
             'bank_account_name' => $request->bank_account_name,
@@ -63,6 +65,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::getHomeRoute());
     }
 }

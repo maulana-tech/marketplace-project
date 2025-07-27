@@ -110,6 +110,73 @@ class ProductOrderController extends Controller
     }
 
     /**
+     * Show buyer's orders
+     */
+    public function myOrders()
+    {
+        $orders = ProductOrder::where('buyer_id', Auth::id())
+                    ->with(['product.creator', 'testimonials'])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
+                    
+        return view('buyer.orders.index', [
+            'orders' => $orders
+        ]);
+    }
+    
+    /**
+     * Show buyer's transaction history (stories)
+     */
+    public function stories()
+    {
+        $orders = ProductOrder::where('buyer_id', Auth::id())
+                    ->with(['product.creator', 'testimonials'])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
+                    
+        return view('buyer.orders.stories', [
+            'orders' => $orders
+        ]);
+    }
+    
+    /**
+     * Cancel buyer's order
+     */
+    public function cancel(ProductOrder $order)
+    {
+        // Check if order belongs to authenticated buyer
+        if ($order->buyer_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+        
+        // Only allow cancellation if order is still pending
+        if ($order->status !== 'pending') {
+            return redirect()->back()->with('error', 'Only pending orders can be cancelled.');
+        }
+        
+        $order->update(['status' => 'cancelled']);
+        
+        return redirect()->back()->with('success', 'Order has been cancelled successfully.');
+    }
+
+    /**
+     * Update order status
+     */
+    public function updateStatus(Request $request, ProductOrder $productOrder)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,success,cancelled'
+        ]);
+        
+        $productOrder->update([
+            'status' => $request->status,
+            'is_paid' => $request->status === 'success' ? true : false
+        ]);
+        
+        return redirect()->back()->with('success', 'Order status updated successfully.');
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(ProductOrder $productOrder)
