@@ -18,28 +18,29 @@ class CategorySeeder extends Seeder
 
         DB::table('categories')->insert([
          [
-            'name' => 'Ebook',
-            'slug' => 'ebook',
+            'name' => 'Reebok',
+            'slug' => 'reebok',
             'icon' => 'images/ic_ebook.svg',
             'created_at' => Carbon ::now(),
             'updated_at' => Carbon ::now(),
          ],
          [
-            'name' => 'Course',
-            'slug' => 'course',
+            'name' => 'Nike',
+            'slug' => 'nike',
             'icon' => 'images/ic_course.svg',
             'created_at' => Carbon ::now(),
             'updated_at' => Carbon ::now(),
          ],
          [
-            'name' => 'Template',
-            'slug' => 'template',
+            'name' => 'Adidas',
+            'slug' => 'adidas',
             'icon' => 'images/ic_template.svg',
             'created_at' => Carbon ::now(),
             'updated_at' => Carbon ::now(),
-         ],[
-            'name' => 'Font',
-            'slug' => 'font',
+         ],
+         [
+            'name' => 'New Balance',
+            'slug' => 'new-balance',
             'icon' => 'images/ic_font.svg',
             'created_at' => Carbon ::now(),
             'updated_at' => Carbon ::now(),
