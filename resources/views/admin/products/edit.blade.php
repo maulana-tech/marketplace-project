@@ -33,14 +33,22 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="path_file" :value="__('path_file')" />
-                        <p>
-                        {{ Storage::url($product->path_file) }}
-                        </p>
-                        <x-text-input id="path_file" class="block mt-1 w-full" type="file" name="path_file" />
-                        <x-input-error :messages="$errors->get('path_file')" class="mt-2" />
+                        <x-input-label for="quantity" :value="__('Quantity')" />
+                        <x-text-input id="quantity" class="block mt-1 w-full" type="number" name="quantity" value="{{$product->quantity}}" required autofocus autocomplete="quantity" />
+                        <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
                     </div>
 
+                    <div class="mt-4">
+                        <x-input-label for="size" :value="__('Size (Optional)')" />
+                        <x-text-input id="size" class="block mt-1 w-full" type="text" name="size" value="{{$product->size}}" autocomplete="size" />
+                        <x-input-error :messages="$errors->get('size')" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-input-label for="color" :value="__('Color (Optional)')" />
+                        <x-text-input id="color" class="block mt-1 w-full" type="text" name="color" value="{{$product->color}}" autocomplete="color" />
+                        <x-input-error :messages="$errors->get('color')" class="mt-2" />
+                    </div>
                     <div class="mt-4">
                         <x-input-label for="name" :value="__('Name')" />
                         <x-text-input value="{{$product->name}}" id="name" class="block mt-1 w-full" type="text" name="name" 

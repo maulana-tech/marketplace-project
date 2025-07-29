@@ -39,14 +39,14 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="size" :value="__('Size')" />
-                        <x-text-input id="size" class="block mt-1 w-full" type="text" name="size" :value="old('size')" required autofocus autocomplete="size" />
+                        <x-input-label for="size" :value="__('Size (Optional)')" />
+                        <x-text-input id="size" class="block mt-1 w-full" type="text" name="size" :value="old('size')" autocomplete="size" />
                         <x-input-error :messages="$errors->get('size')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="color" :value="__('Color')" />
-                        <x-text-input id="color" class="block mt-1 w-full" type="text" name="color" :value="old('color')" required autofocus autocomplete="color" />
+                        <x-input-label for="color" :value="__('Color (Optional)')" />
+                        <x-text-input id="color" class="block mt-1 w-full" type="text" name="color" :value="old('color')" autocomplete="color" />
                         <x-input-error :messages="$errors->get('color')" class="mt-2" />
                     </div>
 
