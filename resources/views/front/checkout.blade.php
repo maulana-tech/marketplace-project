@@ -132,7 +132,7 @@
                 <h1 class="font-semibold text-[32px] ">Checkout Product</h1>
                 <div class="product-detail flex flex-col gap-3">
                     <div class="thumbnail w-[412px] h-[255px] flex shrink-0 rounded-[20px] overflow-hidden">
-                        <img src="{{Storage::url($product->cover)}}" class="w-full h-full object-cover"
+                        <img src="{{$product->cover ? Storage::url($product->cover) : asset('images/default-product.png')}}" class="w-full h-full object-cover"
                             alt="thumbnail">
                     </div>
                     <div class="product-title flex flex-col gap-[30px]">

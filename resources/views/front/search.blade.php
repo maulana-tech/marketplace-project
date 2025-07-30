@@ -37,7 +37,7 @@
             @forelse($products as $product)
                 <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">
                     <a href="{{route('front.details', $product->slug)}}" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">
-                        <img src="{{Storage::url($product->cover)}}" class="w-full h-full object-cover" alt="thumbnail">
+                        <img src="{{$product->cover ? Storage::url($product->cover) : asset('images/default-product.png')}}" class="w-full h-full object-cover" alt="thumbnail">
                         <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-10">Rp
                             {{number_format($product->price)}}</p>
                     </a>

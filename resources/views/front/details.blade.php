@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="background-image w-full h-full absolute top-0 overflow-hidden z-0">
-        <img src="{{Storage::url($product->cover)}}" class="w-full h-full object-cover" alt="hero image">
+        <img src="{{$product->cover ? Storage::url($product->cover) : asset('images/default-product.png')}}" class="w-full h-full object-cover" alt="hero image">
     </div>
     <div class="w-full h-1/3 absolute bottom-0 bg-gradient-to-b from-belibang-black/0 to-belibang-black z-0"></div>
     <div class="w-full h-full absolute top-0 bg-belibang-black/95 z-0"></div>
@@ -22,7 +22,7 @@
 <section id="DetailsContent" class="container max-w-[1130px] mx-auto mb-[32px] relative -top-[70px]">
     <div class="flex flex-col gap-8">
         <div class="w-[1130px] h-[700px] flex shrink-0 rounded-[20px] overflow-hidden">
-            <img src="{{Storage::url($product->cover)}}" class="w-full h-full object-cover" alt="hero image">
+            <img src="{{$product->cover ? Storage::url($product->cover) : asset('images/default-product.png')}}" class="w-full h-full object-cover" alt="hero image">
         </div>
         <div class="flex gap-8 relative -mt-[93px]">
             <div
@@ -116,7 +116,7 @@
         @forelse($other_products as $product)
             <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">
                 <a href="{{route('front.details', $product->slug)}}" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">
-                    <img src="{{Storage::url($product->cover)}}" class="w-full h-full object-cover" alt="thumbnail">
+                    <img src="{{$product->cover ? Storage::url($product->cover) : asset('images/default-product.png')}}" class="w-full h-full object-cover" alt="thumbnail">
                     <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-10">Rp
                         {{number_format($product->price)}}</p>
                 </a>
